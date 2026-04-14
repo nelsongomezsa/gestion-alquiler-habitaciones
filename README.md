@@ -4,7 +4,6 @@
 Este proyecto consiste en el diseño e implementación de una base de datos para la gestión de alquileres de pisos y habitaciones.
 
 Permite gestionar:
-- Ciudades
 - Pisos
 - Habitaciones
 - Inquilinos
@@ -16,7 +15,6 @@ Permite gestionar:
 
 El modelo E/R incluye las siguientes entidades:
 
-- **Ciudades**: almacena las ciudades disponibles
 - **Pisos**: viviendas ubicadas en una ciudad
 - **Habitaciones**: pertenecen a un piso
 - **Inquilinos**: personas que alquilan habitaciones
