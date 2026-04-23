@@ -7,13 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * Gestiona la conexion a MySQL usando el patron Singleton.
- * Lee las credenciales de database.properties en el classpath.
- *
- * Para configurar: copia database.properties.example como database.properties
- * en src/main/resources/ y rellena tus credenciales.
- */
+
 public class DatabaseConnection {
 
     private static DatabaseConnection instancia;
@@ -37,9 +31,7 @@ public class DatabaseConnection {
         this.conexion.setAutoCommit(true);
     }
 
-    /**
-     * Devuelve la unica instancia de la conexion, creandola si no existe o esta cerrada.
-     */
+
     public static synchronized DatabaseConnection getInstance() throws SQLException {
         if (instancia == null || instancia.getConexion().isClosed()) {
             instancia = new DatabaseConnection();
@@ -47,12 +39,10 @@ public class DatabaseConnection {
         return instancia;
     }
 
-    /** Devuelve el objeto Connection listo para usar en los DAOs. */
     public Connection getConexion() {
         return conexion;
     }
 
-    /** Cierra la conexion de forma controlada. Llama a esto al salir de la app. */
     public void cerrarConexion() {
         if (conexion != null) {
             try {

@@ -2,11 +2,6 @@ package com.gestionap.model;
 
 import java.time.LocalDate;
 
-/**
- * Representa una incidencia reportada por un inquilino en una habitacion.
- * Estado posible: pendiente | en_proceso | resuelta
- * Mapea la tabla Incidencias de la base de datos.
- */
 public class Incidencia {
 
     public enum Estado { pendiente, en_proceso, resuelta }
@@ -18,7 +13,7 @@ public class Incidencia {
     private Estado    estado;
     private LocalDate fecha;
 
-    // Campos auxiliares para mostrar en listados
+
     private String nombreInquilino;
     private int    numeroHabitacion;
 

@@ -1,9 +1,5 @@
 package com.gestionap.model;
 
-/**
- * Representa un piso con varias habitaciones.
- * Mapea la tabla Pisos de la base de datos.
- */
 public class Piso {
 
     private int    idPiso;

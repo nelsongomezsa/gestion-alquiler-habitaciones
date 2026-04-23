@@ -7,28 +7,20 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * Logica de negocio para la gestion de inquilinos.
- * Valida datos antes de delegarlos en InquilinoDAO.
- */
+
 public class InquilinoService {
 
     private final InquilinoDAO inquilinoDAO = new InquilinoDAO();
 
-    // Patron DNI/NIE espanol simplificado
+
     private static final Pattern DNI_PATRON = Pattern.compile("^[0-9XYZ][0-9]{7}[A-Z]$");
 
-    /**
-     * Devuelve todos los inquilinos ordenados por apellidos.
-     */
+
     public List<Inquilino> listarTodos() throws SQLException {
         return inquilinoDAO.listarTodos();
     }
 
-    /**
-     * Busca un inquilino por DNI.
-     * Lanza IllegalArgumentException si no existe.
-     */
+
     public Inquilino buscarPorDni(String dni) throws SQLException {
         Inquilino i = inquilinoDAO.buscarPorDni(dni.toUpperCase().trim());
         if (i == null) {
@@ -37,10 +29,7 @@ public class InquilinoService {
         return i;
     }
 
-    /**
-     * Busca un inquilino por ID.
-     * Lanza IllegalArgumentException si no existe.
-     */
+
     public Inquilino buscarPorId(int idInquilino) throws SQLException {
         Inquilino i = inquilinoDAO.buscarPorId(idInquilino);
         if (i == null) {
@@ -49,10 +38,7 @@ public class InquilinoService {
         return i;
     }
 
-    /**
-     * Registra un nuevo inquilino tras validar los datos obligatorios.
-     * Devuelve el ID asignado por la base de datos.
-     */
+
     public int añadirInquilino(String nombre, String apellidos, String dni,
                                 String telefono, String email) throws SQLException {
         validarCamposObligatorios(nombre, apellidos, dni);
@@ -68,9 +54,7 @@ public class InquilinoService {
         return inquilinoDAO.insertar(nuevo);
     }
 
-    // -------------------------------------------------------------------------
-    // Validaciones privadas
-    // -------------------------------------------------------------------------
+
 
     private void validarCamposObligatorios(String nombre, String apellidos, String dni) {
         if (nombre == null || nombre.isBlank()) {

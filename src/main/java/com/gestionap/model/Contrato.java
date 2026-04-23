@@ -3,10 +3,7 @@ package com.gestionap.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/**
- * Representa el contrato de alquiler entre un inquilino y una habitacion.
- * Mapea la tabla Contratos de la base de datos.
- */
+
 public class Contrato {
 
     private int        idContrato;
@@ -16,7 +13,7 @@ public class Contrato {
     private LocalDate  fechaFin;
     private BigDecimal precioMensual;
 
-    // Campos auxiliares para mostrar en listados
+    // Campos auxiliares para mostrar en listas
     private String nombreInquilino;
     private String dniInquilino;
     private int    numeroHabitacion;
@@ -64,7 +61,7 @@ public class Contrato {
     public String getDireccionPiso() { return direccionPiso; }
     public void setDireccionPiso(String direccionPiso) { this.direccionPiso = direccionPiso; }
 
-    /** Indica si el contrato esta vigente a fecha de hoy */
+
     public boolean isActivo() {
         LocalDate hoy = LocalDate.now();
         return !fechaInicio.isAfter(hoy) && !fechaFin.isBefore(hoy);

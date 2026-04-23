@@ -8,23 +8,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Acceso a datos para la tabla Pagos.
- * Realiza operaciones CRUD usando JDBC puro.
- */
+
 public class PagoDAO {
 
     private Connection getConexion() throws SQLException {
         return DatabaseConnection.getInstance().getConexion();
     }
 
-    // -------------------------------------------------------------------------
-    // Consultas de lectura
-    // -------------------------------------------------------------------------
 
-    /**
-     * Lista todos los pagos asociados a un contrato concreto.
-     */
     public List<Pago> listarPorContrato(int idContrato) throws SQLException {
         String sql = """
                 SELECT p.id_pago, p.id_contrato, p.cantidad, p.metodo_pago, p.fecha_pago,
@@ -47,7 +38,7 @@ public class PagoDAO {
         return lista;
     }
 
-    /** Lista todos los pagos de todos los contratos. */
+
     public List<Pago> listarTodos() throws SQLException {
         String sql = """
                 SELECT p.id_pago, p.id_contrato, p.cantidad, p.metodo_pago, p.fecha_pago,
@@ -67,13 +58,7 @@ public class PagoDAO {
         return lista;
     }
 
-    // -------------------------------------------------------------------------
-    // Operaciones de escritura
-    // -------------------------------------------------------------------------
 
-    /**
-     * Registra un nuevo pago y devuelve el ID generado.
-     */
     public int insertar(Pago p) throws SQLException {
         String sql = "INSERT INTO Pagos (id_contrato, cantidad, metodo_pago, fecha_pago) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = getConexion().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -89,9 +74,7 @@ public class PagoDAO {
         throw new SQLException("No se pudo obtener el ID generado para el pago.");
     }
 
-    /**
-     * Elimina un pago por su ID.
-     */
+
     public boolean eliminar(int idPago) throws SQLException {
         String sql = "DELETE FROM Pagos WHERE id_pago = ?";
         try (PreparedStatement ps = getConexion().prepareStatement(sql)) {
@@ -100,9 +83,6 @@ public class PagoDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Metodo auxiliar de mapeo
-    // -------------------------------------------------------------------------
 
     private Pago mapearFila(ResultSet rs) throws SQLException {
         Pago p = new Pago();

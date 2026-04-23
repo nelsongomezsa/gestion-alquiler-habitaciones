@@ -1,9 +1,6 @@
 package com.gestionap.model;
 
-/**
- * Representa una ciudad donde se ubican los pisos.
- * Mapea la tabla Ciudades de la base de datos.
- */
+
 public class Ciudad {
 
     private int idCiudad;

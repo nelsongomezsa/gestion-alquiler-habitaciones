@@ -6,7 +6,8 @@
 <?import javafx.scene.control.Label?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.gestionap.controller.MainController">
+            fx:controller="com.gestionap.controller.MainController"
+            fx:id="borderPane">
 
     <!-- Menú izquierdo -->
     <left>

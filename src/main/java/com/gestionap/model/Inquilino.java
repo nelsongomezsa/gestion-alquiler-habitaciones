@@ -1,9 +1,5 @@
 package com.gestionap.model;
 
-/**
- * Representa a una persona que alquila una habitacion.
- * Mapea la tabla Inquilinos de la base de datos.
- */
 public class Inquilino {
 
     private int    idInquilino;
@@ -43,7 +39,7 @@ public class Inquilino {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    /** Nombre completo para mostrar en listados */
+
     public String getNombreCompleto() {
         return nombre + " " + apellidos;
     }

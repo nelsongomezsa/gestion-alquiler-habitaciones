@@ -3,11 +3,7 @@ package com.gestionap.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/**
- * Representa un pago realizado dentro de un contrato.
- * Metodo de pago posible: transferencia | efectivo | domiciliacion
- * Mapea la tabla Pagos de la base de datos.
- */
+
 public class Pago {
 
     public enum MetodoPago { transferencia, efectivo, domiciliacion }

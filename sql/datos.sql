@@ -1,10 +1,5 @@
 \
 -- PROYECTO: Gestión de Alquiler de Habitaciones
-
-
-USE gestion_alquileres;
-
-
 -- CIUDADES
 
 INSERT INTO Ciudades (nombre) VALUES

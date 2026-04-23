@@ -2,11 +2,6 @@ package com.gestionap.model;
 
 import java.math.BigDecimal;
 
-/**
- * Representa una habitacion dentro de un piso.
- * Estado posible: disponible | alquilada | mantenimiento
- * Mapea la tabla Habitaciones de la base de datos.
- */
 public class Habitacion {
 
     public enum Estado { disponible, alquilada, mantenimiento }

@@ -8,21 +8,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Acceso a datos para la tabla Incidencias.
- * Realiza operaciones CRUD usando JDBC puro.
- */
+
 public class IncidenciaDAO {
 
     private Connection getConexion() throws SQLException {
         return DatabaseConnection.getInstance().getConexion();
     }
 
-    // -------------------------------------------------------------------------
-    // Consultas de lectura
-    // -------------------------------------------------------------------------
 
-    /** Devuelve todas las incidencias con datos de habitacion e inquilino. */
     public List<Incidencia> listarTodas() throws SQLException {
         String sql = """
                 SELECT inc.id_incidencia, inc.id_habitacion, inc.id_inquilino,
@@ -44,9 +37,7 @@ public class IncidenciaDAO {
         return lista;
     }
 
-    /**
-     * Devuelve las incidencias cuyo estado sea 'pendiente'.
-     */
+
     public List<Incidencia> listarPendientes() throws SQLException {
         String sql = """
                 SELECT inc.id_incidencia, inc.id_habitacion, inc.id_inquilino,
@@ -69,10 +60,7 @@ public class IncidenciaDAO {
         return lista;
     }
 
-    /**
-     * Busca una incidencia por ID.
-     * Devuelve null si no existe.
-     */
+
     public Incidencia buscarPorId(int idIncidencia) throws SQLException {
         String sql = """
                 SELECT inc.id_incidencia, inc.id_habitacion, inc.id_inquilino,
@@ -93,13 +81,7 @@ public class IncidenciaDAO {
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // Operaciones de escritura
-    // -------------------------------------------------------------------------
 
-    /**
-     * Inserta una nueva incidencia y devuelve el ID generado.
-     */
     public int insertar(Incidencia inc) throws SQLException {
         String sql = "INSERT INTO Incidencias (id_habitacion, id_inquilino, descripcion, estado, fecha) " +
                      "VALUES (?, ?, ?, ?, ?)";
@@ -117,9 +99,6 @@ public class IncidenciaDAO {
         throw new SQLException("No se pudo obtener el ID generado para la incidencia.");
     }
 
-    /**
-     * Actualiza el estado de una incidencia existente.
-     */
     public boolean actualizarEstado(int idIncidencia, Estado nuevoEstado) throws SQLException {
         String sql = "UPDATE Incidencias SET estado = ? WHERE id_incidencia = ?";
         try (PreparedStatement ps = getConexion().prepareStatement(sql)) {
@@ -129,9 +108,7 @@ public class IncidenciaDAO {
         }
     }
 
-    /**
-     * Elimina una incidencia por su ID.
-     */
+
     public boolean eliminar(int idIncidencia) throws SQLException {
         String sql = "DELETE FROM Incidencias WHERE id_incidencia = ?";
         try (PreparedStatement ps = getConexion().prepareStatement(sql)) {
@@ -140,9 +117,7 @@ public class IncidenciaDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Metodo auxiliar de mapeo
-    // -------------------------------------------------------------------------
+
 
     private Incidencia mapearFila(ResultSet rs) throws SQLException {
         Incidencia inc = new Incidencia();

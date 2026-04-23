@@ -12,36 +12,23 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Logica de negocio para contratos y pagos.
- * Coordina ContratoDAO, PagoDAO y HabitacionService para mantener la coherencia.
- */
 public class ContratoService {
 
     private final ContratoDAO       contratoDAO       = new ContratoDAO();
     private final PagoDAO           pagoDAO           = new PagoDAO();
     private final HabitacionService habitacionService = new HabitacionService();
 
-    // -------------------------------------------------------------------------
-    // Contratos
-    // -------------------------------------------------------------------------
 
-    /** Devuelve todos los contratos. */
     public List<Contrato> listarTodos() throws SQLException {
         return contratoDAO.listarTodos();
     }
 
-    /**
-     * Devuelve los contratos cuya vigencia cubre la fecha actual.
-     */
+
     public List<Contrato> listarActivos() throws SQLException {
         return contratoDAO.listarActivos();
     }
 
-    /**
-     * Busca un contrato por ID.
-     * Lanza IllegalArgumentException si no existe.
-     */
+
     public Contrato buscarPorId(int idContrato) throws SQLException {
         Contrato c = contratoDAO.buscarPorId(idContrato);
         if (c == null) {
@@ -50,21 +37,12 @@ public class ContratoService {
         return c;
     }
 
-    /**
-     * Crea un nuevo contrato de alquiler.
-     * Reglas de negocio:
-     *   - La habitacion debe estar disponible.
-     *   - La fecha de fin debe ser posterior a la de inicio.
-     *   - El precio debe ser positivo.
-     * Al crearse el contrato, la habitacion pasa a estado 'alquilada'.
-     *
-     * @return ID del contrato creado.
-     */
+
     public int crearContrato(int idHabitacion, int idInquilino,
                               LocalDate fechaInicio, LocalDate fechaFin,
                               BigDecimal precioMensual) throws SQLException {
 
-        // Validaciones de negocio
+        // Validacion del negocio
         if (fechaFin.isBefore(fechaInicio) || fechaFin.isEqual(fechaInicio)) {
             throw new IllegalArgumentException(
                 "La fecha de fin debe ser posterior a la fecha de inicio.");
@@ -89,25 +67,14 @@ public class ContratoService {
         return idContrato;
     }
 
-    // -------------------------------------------------------------------------
-    // Pagos
-    // -------------------------------------------------------------------------
 
-    /**
-     * Lista los pagos de un contrato concreto.
-     */
     public List<Pago> listarPagosPorContrato(int idContrato) throws SQLException {
         // Verificar que el contrato existe antes de listar pagos
         buscarPorId(idContrato);
         return pagoDAO.listarPorContrato(idContrato);
     }
 
-    /**
-     * Registra un pago para un contrato.
-     * Valida que el contrato exista y que la cantidad sea positiva.
-     *
-     * @return ID del pago creado.
-     */
+
     public int registrarPago(int idContrato, BigDecimal cantidad,
                               MetodoPago metodoPago, LocalDate fechaPago) throws SQLException {
 

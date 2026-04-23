@@ -7,21 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Acceso a datos para la tabla Inquilinos.
- * Realiza operaciones CRUD usando JDBC puro.
- */
+
 public class InquilinoDAO {
 
     private Connection getConexion() throws SQLException {
         return DatabaseConnection.getInstance().getConexion();
     }
 
-    // -------------------------------------------------------------------------
-    // Consultas de lectura
-    // -------------------------------------------------------------------------
-
-    /** Devuelve todos los inquilinos ordenados por apellidos. */
     public List<Inquilino> listarTodos() throws SQLException {
         String sql = "SELECT id_inquilino, nombre, apellidos, dni, telefono, email " +
                      "FROM Inquilinos ORDER BY apellidos, nombre";
@@ -35,10 +27,7 @@ public class InquilinoDAO {
         return lista;
     }
 
-    /**
-     * Busca un inquilino por DNI (unico).
-     * Devuelve null si no existe.
-     */
+
     public Inquilino buscarPorDni(String dni) throws SQLException {
         String sql = "SELECT id_inquilino, nombre, apellidos, dni, telefono, email " +
                      "FROM Inquilinos WHERE dni = ?";
@@ -51,10 +40,7 @@ public class InquilinoDAO {
         return null;
     }
 
-    /**
-     * Busca un inquilino por ID.
-     * Devuelve null si no existe.
-     */
+
     public Inquilino buscarPorId(int idInquilino) throws SQLException {
         String sql = "SELECT id_inquilino, nombre, apellidos, dni, telefono, email " +
                      "FROM Inquilinos WHERE id_inquilino = ?";
@@ -67,13 +53,7 @@ public class InquilinoDAO {
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // Operaciones de escritura
-    // -------------------------------------------------------------------------
 
-    /**
-     * Inserta un nuevo inquilino y devuelve el ID generado.
-     */
     public int insertar(Inquilino i) throws SQLException {
         String sql = "INSERT INTO Inquilinos (nombre, apellidos, dni, telefono, email) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = getConexion().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -90,9 +70,6 @@ public class InquilinoDAO {
         throw new SQLException("No se pudo obtener el ID generado para el inquilino.");
     }
 
-    /**
-     * Actualiza los datos de un inquilino existente.
-     */
     public boolean actualizar(Inquilino i) throws SQLException {
         String sql = "UPDATE Inquilinos SET nombre=?, apellidos=?, dni=?, telefono=?, email=? " +
                      "WHERE id_inquilino=?";
@@ -107,9 +84,7 @@ public class InquilinoDAO {
         }
     }
 
-    /**
-     * Elimina un inquilino por su ID.
-     */
+
     public boolean eliminar(int idInquilino) throws SQLException {
         String sql = "DELETE FROM Inquilinos WHERE id_inquilino = ?";
         try (PreparedStatement ps = getConexion().prepareStatement(sql)) {
@@ -118,9 +93,6 @@ public class InquilinoDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Metodo auxiliar de mapeo
-    // -------------------------------------------------------------------------
 
     private Inquilino mapearFila(ResultSet rs) throws SQLException {
         return new Inquilino(

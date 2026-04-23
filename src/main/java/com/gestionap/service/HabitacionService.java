@@ -7,32 +7,22 @@ import com.gestionap.model.Habitacion.Estado;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Logica de negocio para la gestion de habitaciones.
- * Coordina validaciones antes de delegar en HabitacionDAO.
- */
+
 public class HabitacionService {
 
     private final HabitacionDAO habitacionDAO = new HabitacionDAO();
 
-    /**
-     * Devuelve todas las habitaciones con informacion de piso y ciudad.
-     */
+
     public List<Habitacion> listarTodas() throws SQLException {
         return habitacionDAO.listarTodas();
     }
 
-    /**
-     * Devuelve solo las habitaciones disponibles para alquilar.
-     */
+
     public List<Habitacion> listarDisponibles() throws SQLException {
         return habitacionDAO.listarDisponibles();
     }
 
-    /**
-     * Busca una habitacion por ID.
-     * Lanza IllegalArgumentException si no existe.
-     */
+
     public Habitacion buscarPorId(int idHabitacion) throws SQLException {
         Habitacion h = habitacionDAO.buscarPorId(idHabitacion);
         if (h == null) {
@@ -41,12 +31,7 @@ public class HabitacionService {
         return h;
     }
 
-    /**
-     * Cambia el estado de una habitacion.
-     * Valida que la transicion sea coherente:
-     * - Solo se puede alquilar una habitacion disponible.
-     * - Solo se puede marcar como disponible una habitacion en mantenimiento.
-     */
+
     public void cambiarEstado(int idHabitacion, Estado nuevoEstado) throws SQLException {
         Habitacion h = buscarPorId(idHabitacion);
         Estado actual = h.getEstado();
@@ -66,9 +51,7 @@ public class HabitacionService {
         }
     }
 
-    /**
-     * Marca una habitacion como disponible (usada al finalizar un contrato).
-     */
+
     public void liberarHabitacion(int idHabitacion) throws SQLException {
         habitacionDAO.actualizarEstado(idHabitacion, Estado.disponible);
     }

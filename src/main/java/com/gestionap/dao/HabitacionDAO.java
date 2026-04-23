@@ -9,23 +9,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Acceso a datos para la tabla Habitaciones.
- * Realiza operaciones CRUD usando JDBC puro.
- */
+
 public class HabitacionDAO {
 
     private Connection getConexion() throws SQLException {
         return DatabaseConnection.getInstance().getConexion();
     }
 
-    // -------------------------------------------------------------------------
-    // Consultas de lectura
-    // -------------------------------------------------------------------------
 
-    /**
-     * Devuelve todas las habitaciones con datos de su piso y ciudad (JOIN).
-     */
     public List<Habitacion> listarTodas() throws SQLException {
         String sql = """
                 SELECT h.id_habitacion, h.numero, h.precio, h.estado, h.id_piso,
@@ -45,9 +36,7 @@ public class HabitacionDAO {
         return lista;
     }
 
-    /**
-     * Devuelve solo las habitaciones con estado 'disponible'.
-     */
+
     public List<Habitacion> listarDisponibles() throws SQLException {
         String sql = """
                 SELECT h.id_habitacion, h.numero, h.precio, h.estado, h.id_piso,
@@ -68,10 +57,6 @@ public class HabitacionDAO {
         return lista;
     }
 
-    /**
-     * Busca una habitacion por su ID.
-     * Devuelve null si no existe.
-     */
     public Habitacion buscarPorId(int idHabitacion) throws SQLException {
         String sql = """
                 SELECT h.id_habitacion, h.numero, h.precio, h.estado, h.id_piso,
@@ -90,13 +75,7 @@ public class HabitacionDAO {
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // Operaciones de escritura
-    // -------------------------------------------------------------------------
 
-    /**
-     * Inserta una nueva habitacion y devuelve el ID generado.
-     */
     public int insertar(Habitacion h) throws SQLException {
         String sql = "INSERT INTO Habitaciones (numero, precio, estado, id_piso) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = getConexion().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -112,9 +91,6 @@ public class HabitacionDAO {
         throw new SQLException("No se pudo obtener el ID generado para la habitacion.");
     }
 
-    /**
-     * Actualiza el estado de una habitacion.
-     */
     public boolean actualizarEstado(int idHabitacion, Estado nuevoEstado) throws SQLException {
         String sql = "UPDATE Habitaciones SET estado = ? WHERE id_habitacion = ?";
         try (PreparedStatement ps = getConexion().prepareStatement(sql)) {
@@ -124,9 +100,6 @@ public class HabitacionDAO {
         }
     }
 
-    /**
-     * Elimina una habitacion por su ID.
-     */
     public boolean eliminar(int idHabitacion) throws SQLException {
         String sql = "DELETE FROM Habitaciones WHERE id_habitacion = ?";
         try (PreparedStatement ps = getConexion().prepareStatement(sql)) {
@@ -135,9 +108,6 @@ public class HabitacionDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Metodo auxiliar de mapeo
-    // -------------------------------------------------------------------------
 
     private Habitacion mapearFila(ResultSet rs) throws SQLException {
         Habitacion h = new Habitacion();
