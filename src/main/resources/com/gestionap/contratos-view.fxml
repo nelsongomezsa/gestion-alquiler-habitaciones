@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gestionap.controller.ContratosController"
+      spacing="10"
+      style="-fx-padding: 20; -fx-background-color: #ecf0f1;">
+
+    <Label text="Contratos"
+           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+    <TableView fx:id="tablaContratos" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId"           text="ID"           prefWidth="60"/>
+            <TableColumn fx:id="colInquilino"    text="Inquilino"    prefWidth="160"/>
+            <TableColumn fx:id="colHabitacion"   text="Habitación"   prefWidth="100"/>
+            <TableColumn fx:id="colFechaInicio"  text="Fecha Inicio" prefWidth="120"/>
+            <TableColumn fx:id="colFechaFin"     text="Fecha Fin"    prefWidth="120"/>
+            <TableColumn fx:id="colPrecio"       text="Precio/mes"   prefWidth="110"/>
+        </columns>
+    </TableView>
+
+</VBox>
