@@ -1,0 +1,11 @@
+target/
+*.class
+*.jar
+src/main/resources/database.properties
+.idea/
+*.iml
+.DS_Store
+**/.DS_Store
+.vscode/
+*.log
+*.tmp
