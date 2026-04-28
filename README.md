@@ -143,6 +143,3 @@ gestion-alquiler-habitaciones/
 
 ---
 
-## Licencia
-
-[MIT](https://opensource.org/licenses/MIT)
