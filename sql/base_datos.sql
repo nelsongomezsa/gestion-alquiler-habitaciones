@@ -18,7 +18,7 @@ CREATE TABLE Ciudades (
 
 
 -- TABLA: Pisos
--- Un piso está en una ciudad (N:1)
+
 
 CREATE TABLE Pisos (
     id_piso             INT          PRIMARY KEY AUTO_INCREMENT,
@@ -30,8 +30,7 @@ CREATE TABLE Pisos (
 
 
 -- TABLA: Habitaciones
--- Una habitación pertenece a un piso (N:1)
--- estado: disponible, alquilada, mantenimiento
+
 
 CREATE TABLE Habitaciones (
     id_habitacion INT          PRIMARY KEY AUTO_INCREMENT,
@@ -44,7 +43,7 @@ CREATE TABLE Habitaciones (
 
 
 -- TABLA: Inquilinos
--- Personas que alquilan habitaciones
+
 
 CREATE TABLE Inquilinos (
     id_inquilino INT          PRIMARY KEY AUTO_INCREMENT,
@@ -57,7 +56,7 @@ CREATE TABLE Inquilinos (
 
 
 -- TABLA: Contratos
--- Vincula inquilino con habitación (relación se_alquilan)
+
 
 CREATE TABLE Contratos (
     id_contrato    INT          PRIMARY KEY AUTO_INCREMENT,
@@ -72,7 +71,7 @@ CREATE TABLE Contratos (
 
 
 -- TABLA: Pagos
--- Un contrato genera muchos pagos (relación generan)
+
 
 CREATE TABLE Pagos (
     id_pago     INT          PRIMARY KEY AUTO_INCREMENT,
@@ -85,7 +84,7 @@ CREATE TABLE Pagos (
 
 
 -- TABLA: Incidencias
--- Los inquilinos reportan incidencias en habitaciones
+
 
 CREATE TABLE Incidencias (
     id_incidencia INT          PRIMARY KEY AUTO_INCREMENT,
